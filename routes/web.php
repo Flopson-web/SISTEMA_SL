@@ -19,9 +19,10 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-
+    
     Route::resource('courses', CourseController::class);
-    Route::resource('students', StudentController::class);
+    Route::resource('students', StudentController::class)->except(['show']);
+    Route::get('/students/{id}', [StudentController::class, 'show'])->name('students.show');
     Route::resource('reports', ReportController::class);
     Route::resource('users', UserController::class);
     Route::resource('teachers',TeacherController::class);

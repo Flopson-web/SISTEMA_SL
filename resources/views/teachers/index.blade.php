@@ -17,7 +17,6 @@
                     <table class="table-auto w-full">
                         <thead>
                             <tr>
-                                <th class="px-4 py-2 text-gray-900 dark:text-white text-center">ID</th>
                                 <th class="px-4 py-2 text-gray-900 dark:text-white text-center">Name</th>
                                 <th class="px-4 py-2 text-gray-900 dark:text-white text-center">Lastname</th>
                                 <th class="px-4 py-2 text-gray-900 dark:text-white text-center">Specialty</th>
@@ -30,7 +29,6 @@
                         <tbody>
                             @foreach($teachers as $teachers)
                             <tr>
-                                <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">{{ $teachers->id }}</td>
                                 <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">{{ $teachers->nombre }}</td>
                                 <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">{{ $teachers->apellido }}</td>
                                 <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">{{ $teachers->especialidad }}</td>

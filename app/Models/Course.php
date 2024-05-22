@@ -20,11 +20,11 @@ class Course extends Model
 
     //relacion muchos a muchos
     public function teachers(){
-        return $this->belongsToMany(Teacher::class);
+        return $this->belongsToMany(Teacher::class, 'course_teacher');
     }
     //relacion uno a muchos
     public function students() {
-        return $this->hasMany(Student::class);
+        return $this->hasMany(Student::class, 'course_id');
     }
     //relacion uno a muchos
     public function reports(){

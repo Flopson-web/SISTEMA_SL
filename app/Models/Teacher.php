@@ -23,6 +23,6 @@ class Teacher extends Model
     }
     //relacion muchos a muchos
     public function courses(){
-        return $this->belongsToMany(Course::class, 'course_assignments');
+        return $this->belongsToMany(Course::class, 'course_teacher');
     }
 }

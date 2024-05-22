@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use App\Models\Course;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -21,7 +23,9 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('students.create');
+        $courses = Course::all();
+        $users = User::all();
+        return view('students.create', compact('users'), compact('courses'));
     }
 
     /**
@@ -33,10 +37,8 @@ class StudentController extends Controller
         $request->validate([
             'nombre' => 'required|string|min:5|max:255',
             'apellido' => 'required|string|min:5|max:255',
-            'birth_date' => 'required|date|min:1',
-            'edad' => 'required|integer|min:1',
-            'alias' => 'required|string|min:5|max:255',
             'foto' => 'nullable',
+            'edad' => 'nullable|integer',
             'nro_de_lista' => 'nullable',
             'nombre_padre' => 'nullable|string|max:255',
             'trabajo_padre' => 'nullable|string|max:255',
@@ -71,7 +73,8 @@ class StudentController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $student = Student::with('courses')->findOrFail($id);
+        return view('students.show', compact('student'));
     }
 
     /**
@@ -79,8 +82,10 @@ class StudentController extends Controller
      */
     public function edit(string $id)
     {
+        $courses = Course::all();
+        $users = User::all();
         $students = Student::findOrFail($id);
-        return view('students.edit', compact('students'));
+        return view('students.edit', compact('students', 'users', 'courses'));
     }
 
     /**
@@ -92,10 +97,8 @@ class StudentController extends Controller
         $request->validate([
             'nombre' => 'required|string|min:5|max:255',
             'apellido' => 'required|string|min:5|max:255',
-            'birth_date' => 'required|date|min:1',
-            'edad' => 'required|integer|min:1',
-            'alias' => 'required|string|min:5|max:255',
             'foto' => 'nullable',
+            'edad' => 'required|integer|min:1',
             'nro_de_lista' => 'nullable',
             'nombre_padre' => 'nullable|string|max:255',
             'trabajo_padre' => 'nullable|string|max:255',
@@ -127,6 +130,7 @@ class StudentController extends Controller
         // Redireccionar a la vista de listado de estudiantes
         return redirect()->route('students.index');
     }
+    
 
     /**
      * Remove the specified resource from storage.
