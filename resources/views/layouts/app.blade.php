@@ -13,9 +13,11 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <script src="{{asset('js/alertify.min.js')}}"></script>
 
         <!-- Styles -->
         @livewireStyles
+        <link href="{{ asset('css/alertify.min.css') }}" rel="stylesheet">
     </head>
     <body class="font-sans antialiased">
         <x-banner />

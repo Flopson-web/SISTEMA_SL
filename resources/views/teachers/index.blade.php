@@ -62,7 +62,7 @@ function confirmDelete(id) {
         if (e) {
             let form = document.createElement('form');
             form.method = 'POST';
-            form.action = '/students/' + id;
+            form.action = '/teachers/' + id;
             form.innerHTML = '@csrf @method("DELETE")';
             document.body.appendChild(form);
             form.submit();
