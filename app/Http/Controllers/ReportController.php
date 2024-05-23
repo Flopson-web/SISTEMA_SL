@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Report;
+use App\Models\Student;
+use App\Models\Course;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
@@ -21,7 +23,9 @@ class ReportController extends Controller
      */
     public function create()
     {
-        return view('reports.create');
+        $courses = Course::all();
+        $students = Student::all();
+        return view('reports.create', compact('courses', 'students'));
     }
 
     /**
@@ -61,8 +65,10 @@ class ReportController extends Controller
      */
     public function edit(string $id)
     {
+        $courses = Course::all();
+        $students = Student::all();
         $reports = Report::findOrFail($id);
-        return view('reports.edit', compact('reports'));
+        return view('reports.edit', compact('reports', 'courses', 'students'));
     }
 
     /**

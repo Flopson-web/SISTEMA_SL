@@ -41,9 +41,6 @@
                         <a href="{{route('students.index')}}" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Students</a>
                         <a href="{{route('courses.index')}}" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Courses</a>
                         <a href="{{route('reports.index')}}" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Reports</a>
-                   {{-- @foreach($courses as $course)
-                        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">{{$course->nombre_curso}}</a>
-                    @endforeach--}}
 
                     </div>
                 </div>
@@ -101,7 +98,7 @@
                     <a href="{{route('login')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
                         Login
                     </a>
-                    <a href={{route('register')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+                    <a href="{{route('register')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
                         Register
                     </a>
                 </div>

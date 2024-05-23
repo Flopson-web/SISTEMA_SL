@@ -17,7 +17,7 @@
                     <table class="table-auto w-full">
                         <thead>
                             <tr>
-                                <th class="px-4 py-2 text-gray-900 dark:text-white text-center">ID</th>
+                                <th class="px-4 py-2 text-gray-900 dark:text-white text-center">Curso</th>
                                 <th class="px-4 py-2 text-gray-900 dark:text-white text-center">Name</th>
                                 <th class="px-4 py-2 text-gray-900 dark:text-white text-center">Lastname</th>
                                 <th class="px-4 py-2 text-gray-900 dark:text-white text-center">List Number</th>
@@ -29,7 +29,7 @@
                         <tbody>
                             @foreach($students as $students)
                             <tr>
-                                <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">{{ $students->id }}</td>
+                                <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">{{ $students->courses->nombre_curso }}</td>
                                 <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">{{ $students->nombre }}</td>
                                 <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">{{ $students->apellido }}</td>
                                 <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">{{ $students->nro_de_lista }}</td>

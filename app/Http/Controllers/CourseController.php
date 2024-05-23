@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Teacher;
 use App\Models\Course;
 
 class CourseController extends Controller
@@ -21,7 +22,8 @@ class CourseController extends Controller
      */
     public function create()
     {
-        return view('courses.create');
+        $asesores = Teacher::all();
+        return view('courses.create', compact('asesores'));
     }
 
     /**
@@ -32,10 +34,11 @@ class CourseController extends Controller
         // Validar los datos del formulario
         $request->validate([
             'nombre_curso' => 'required|string|min:5|max:255',
-            'gestion_academica' => 'required|string|min:5|max:255',
+            'gestion_academica' => 'required|integer|min:2024|max:2999',
             'paralelo' => 'required|in:A,B,C,D',
             'turno' => 'required|in:Mañana,Tarde',
-            'asesor_id' => 'required|exists:teachers,id',
+            'asesor_id_1' => 'required|exists:teachers,id',
+            'asesor_id_2' => 'required|exists:teachers,id',
         ]);
 
          // Crear un nuevo estudiante usando el método `create` del modelo
@@ -58,8 +61,9 @@ class CourseController extends Controller
      */
     public function edit(string $id)
     {
-        $courses = Course::findOrFail($id);
-        return view('courses.edit', compact('courses'));
+        $teachers = Teacher::all();
+        $course = Course::findOrFail($id);
+        return view('courses.edit', compact('course', 'teachers'));
     }
 
     /**
@@ -70,10 +74,11 @@ class CourseController extends Controller
         // Validar los datos del formulario
         $request->validate([
             'nombre_curso' => 'required|string|min:5|max:255',
-            'gestion_academica' => 'required|string|min:5|max:255',
+            'gestion_academica' => 'required|integer|min:2024|max:2999',
             'paralelo' => 'required|in:A,B,C,D',
             'turno' => 'required|in:Mañana,Tarde',
-            'asesor_id' => 'required|exists:teachers,id',
+            'asesor_id_1' => 'required|exists:teachers,id',
+            'asesor_id_2' => 'required|exists:teachers,id',
         ]);
 
         // Buscar el estudiante por su ID

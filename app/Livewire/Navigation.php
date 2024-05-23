@@ -13,7 +13,7 @@ class Navigation extends Component
 {
     public function render()
     {
-        $courses = Course::take(4)->get();
+        $courses = Course::all();
         $teachers = Teacher::all();
         $students = Student::all();
         $reports = Report::all();

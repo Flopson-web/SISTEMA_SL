@@ -13,9 +13,9 @@ class Course extends Model
         'nombre_curso', 
         'gestion_academica', 
         'paralelo',
-        'nivel',
         'turno',
-        'asesor_id'
+        'asesor_id_1',
+        'asesor_id_2'
     ];
 
     //relacion muchos a muchos
@@ -28,6 +28,15 @@ class Course extends Model
     }
     //relacion uno a muchos
     public function reports(){
-        return $this->hasMany(Report::class);
+        return $this->hasMany(Report::class, 'course_id');
+    }
+
+    //relacion uno a muchos
+    public function asesor1(){
+        return $this->belongsTo(Teacher::class, 'asesor_id_1');
+    }
+
+    public function asesor2(){
+        return $this->belongsTo(Teacher::class, 'asesor_id_2');
     }
 }

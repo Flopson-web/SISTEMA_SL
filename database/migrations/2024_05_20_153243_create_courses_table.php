@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->string('nombre_curso');
-            $table->string('gestion_academica');
+            $table->year('gestion_academica');
             $table->enum('paralelo', ['A', 'B', 'C', 'D']);
             $table->enum('turno', ['Mañana', 'Tarde']);
-            $table->foreignId('asesor_id')->constrained('teachers')->onDelete('CASCADE');
+            $table->foreignId('asesor_id_1')->constrained('teachers')->onDelete('CASCADE');
+            $table->foreignId('asesor_id_2')->constrained('teachers')->onDelete('CASCADE');
             $table->timestamps();
         });
     }

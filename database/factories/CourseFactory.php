@@ -23,7 +23,8 @@ class CourseFactory extends Factory
                 'gestion_academica' => $this->faker->year,
                 'paralelo' => $this->faker->randomElement(['A', 'B', 'C', 'D']),
                 'turno' => $this->faker->randomElement(['Mañana', 'Tarde']),
-                'asesor_id' => Teacher::all()->random()->id
+                'asesor_id_1' => Teacher::all()->random()->id,
+                'asesor_id_2' => Teacher::all()->random()->id
         ];
     }
 }
