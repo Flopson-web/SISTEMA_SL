@@ -36,16 +36,16 @@ class Student extends Model
         'user_id'
     ];
 
-    //relacion uno a muchos inversa
+    //relacion uno a uno inversa
     public function user(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
     //relacion uno a muchos inversa
     public function courses(){
-        return $this->belongsTo(Course::class);
+        return $this->belongsTo(Course::class, 'course_id');
     }
     //relacion uno a muchos
     public function reports(){
-        return $this->hasMany(Report::class);
+        return $this->hasMany(Report::class, 'report_id');
     }
 }

@@ -1,7 +1,7 @@
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
-            <x-authentication-card-logo />
+            <img class="h-20 w-auto" src="/images/SL.png" alt="SL">
         </x-slot>
 
         <div x-data="{ recovery: false }">

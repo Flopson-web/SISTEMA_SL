@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ class TeacherController extends Controller
     public function index()
     {
         $teachers = Teacher::all();
-        return view ('teachers.index', compact('teachers'));
+        return view ('admin.teachers.index', compact('teachers'));
     }
 
     /**
@@ -23,7 +24,7 @@ class TeacherController extends Controller
     public function create()
     {
         $users = User::all();
-        return view('teachers.create',compact('users'));
+        return view('admin.teachers.create',compact('users'));
     }
 
     /**
@@ -44,17 +45,10 @@ class TeacherController extends Controller
         Teacher::create($request->all());
 
         // Redireccionar a la vista de listado de profesor
-        return redirect()->route('teachers.index');
+        return redirect()->route('admin.teachers.index');
 
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -63,7 +57,7 @@ class TeacherController extends Controller
     {
         $users = User::all();
         $teachers = Teacher::findOrFail($id);
-        return view('teachers.edit', compact('teachers'),compact('users'));
+        return view('admin.teachers.edit', compact('teachers'),compact('users'));
     }
 
     /**
@@ -71,8 +65,8 @@ class TeacherController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // Validar los datos del formulario
-        $request->validate([
+         // Validar los datos del formulario
+         $request->validate([
             'nombre' => 'required|string|min:5|max:255',
             'apellido' => 'required|string|min:5|max:255',
             'especialidad' => 'required|string|min:5|max:255',
@@ -88,7 +82,7 @@ class TeacherController extends Controller
         $teachers->update($request->all());
 
         // Redireccionar a la vista de listado de estudiantes
-        return redirect()->route('teachers.index');
+        return redirect()->route('admin.teachers.index');
     }
 
     /**
@@ -100,6 +94,6 @@ class TeacherController extends Controller
 
         $teachers->delete();
 
-        return redirect()->route('teachers.index');
+        return redirect()->route('admin.teachers.index');
     }
 }

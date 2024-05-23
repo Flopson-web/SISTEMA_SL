@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Models\Course;
+use App\Models\Teacher;
+use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
@@ -13,7 +15,7 @@ class CourseController extends Controller
     public function index()
     {
         $courses = Course::all();
-        return view('courses.index', compact('courses'));
+        return view('admin.courses.index', compact('courses'));
     }
 
     /**
@@ -21,7 +23,8 @@ class CourseController extends Controller
      */
     public function create()
     {
-        return view('courses.create');
+        $asesores = Teacher::all();
+        return view('admin.courses.create', compact('asesores'));
     }
 
     /**
@@ -29,37 +32,34 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        // Validar los datos del formulario
-        $request->validate([
+         // Validar los datos del formulario
+         $request->validate([
             'nombre_curso' => 'required|string|min:5|max:255',
-            'gestion_academica' => 'required|string|min:5|max:255',
+            'gestion_academica' => 'required|integer|min:2024|max:2999',
             'paralelo' => 'required|in:A,B,C,D',
             'turno' => 'required|in:Mañana,Tarde',
-            'asesor_id' => 'required|exists:teachers,id',
+            'asesor_id_1' => 'required|exists:teachers,id',
+            'asesor_id_2' => 'required|exists:teachers,id',
         ]);
 
          // Crear un nuevo estudiante usando el método `create` del modelo
         Course::create($request->all());
 
         // Redireccionar a la vista de listado de estudiantes
-        return redirect()->route('courses.index');
+        return redirect()->route('admin.courses.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
-    }
-
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        $courses = Course::findOrFail($id);
-        return view('courses.edit', compact('courses'));
+        $teachers = Teacher::all();
+        $course = Course::findOrFail($id);
+        return view('admin.courses.edit', compact('course', 'teachers'));
     }
 
     /**
@@ -67,13 +67,14 @@ class CourseController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // Validar los datos del formulario
-        $request->validate([
+         // Validar los datos del formulario
+         $request->validate([
             'nombre_curso' => 'required|string|min:5|max:255',
-            'gestion_academica' => 'required|string|min:5|max:255',
+            'gestion_academica' => 'required|integer|min:2024|max:2999',
             'paralelo' => 'required|in:A,B,C,D',
             'turno' => 'required|in:Mañana,Tarde',
-            'asesor_id' => 'required|exists:teachers,id',
+            'asesor_id_1' => 'required|exists:teachers,id',
+            'asesor_id_2' => 'required|exists:teachers,id',
         ]);
 
         // Buscar el estudiante por su ID
@@ -83,8 +84,9 @@ class CourseController extends Controller
         $courses->update($request->all());
 
         // Redireccionar a la vista de listado de estudiantes
-        return redirect()->route('courses.index');
+        return redirect()->route('admin.courses.index');
     }
+    
 
     /**
      * Remove the specified resource from storage.
@@ -95,6 +97,6 @@ class CourseController extends Controller
 
         $courses->delete();
 
-        return redirect()->route('courses.index');
+        return redirect()->route('admin.courses.index');
     }
 }

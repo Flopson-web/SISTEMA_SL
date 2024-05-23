@@ -1,20 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Student;
 
-use App\Models\User;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
-class UserController extends Controller
+class ReportController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $users = User::all();
-        return view ('users.index', compact('users'));
+        //
     }
 
     /**
@@ -22,7 +20,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        //
     }
 
     /**
@@ -30,7 +28,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-       
+        //
     }
 
     /**
@@ -46,8 +44,7 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        $users = User::findOrFail($id);
-        return view('users.edit', compact('users'));
+        //
     }
 
     /**
@@ -55,14 +52,14 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        
-    
+        //
     }
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        
+        //
     }
 }
