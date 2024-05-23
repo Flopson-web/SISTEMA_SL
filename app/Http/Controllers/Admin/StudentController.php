@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Student;
 use App\Models\Course;
 use App\Models\User;
@@ -15,7 +16,7 @@ class StudentController extends Controller
     public function index()
     {
         $students = Student::all();
-        return view ('students.index', compact('students'));
+        return view ('admin.students.index', compact('students'));
     }
 
     /**
@@ -25,7 +26,7 @@ class StudentController extends Controller
     {
         $courses = Course::all();
         $users = User::all();
-        return view('students.create', compact('users'), compact('courses'));
+        return view('admin.students.create', compact('users'), compact('courses'));
     }
 
     /**
@@ -33,8 +34,8 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        // Validar los datos del formulario
-        $request->validate([
+         // Validar los datos del formulario
+         $request->validate([
             'nombre' => 'required|string|min:5|max:255',
             'apellido' => 'required|string|min:5|max:255',
             'foto' => 'nullable',
@@ -65,7 +66,7 @@ class StudentController extends Controller
         Student::create($request->all());
 
         // Redireccionar a la vista de listado de estudiantes
-        return redirect()->route('students.index');
+        return redirect()->route('admin.students.index');
     }
 
     /**
@@ -74,7 +75,7 @@ class StudentController extends Controller
     public function show(string $id)
     {
         $student = Student::with('courses')->findOrFail($id);
-        return view('students.show', compact('student'));
+        return view('admin.students.show', compact('student'));
     }
 
     /**
@@ -85,7 +86,7 @@ class StudentController extends Controller
         $courses = Course::all();
         $users = User::all();
         $students = Student::findOrFail($id);
-        return view('students.edit', compact('students', 'users', 'courses'));
+        return view('admin.students.edit', compact('students', 'users', 'courses'));
     }
 
     /**
@@ -128,9 +129,8 @@ class StudentController extends Controller
         $students->update($request->all());
 
         // Redireccionar a la vista de listado de estudiantes
-        return redirect()->route('students.index');
+        return redirect()->route('admin.students.index');
     }
-    
 
     /**
      * Remove the specified resource from storage.
@@ -141,6 +141,6 @@ class StudentController extends Controller
 
         $students->delete();
 
-        return redirect()->route('students.index');
+        return redirect()->route('admin.students.index');
     }
 }

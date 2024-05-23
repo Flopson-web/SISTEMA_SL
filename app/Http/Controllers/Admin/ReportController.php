@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Report;
 use App\Models\Student;
 use App\Models\Course;
@@ -15,7 +16,7 @@ class ReportController extends Controller
     public function index()
     {
         $reports = Report::all();
-        return view ('reports.index', compact('reports'));
+        return view ('admin.reports.index', compact('reports'));
     }
 
     /**
@@ -25,7 +26,7 @@ class ReportController extends Controller
     {
         $courses = Course::all();
         $students = Student::all();
-        return view('reports.create', compact('courses', 'students'));
+        return view('admin.reports.create', compact('courses', 'students'));
     }
 
     /**
@@ -49,16 +50,12 @@ class ReportController extends Controller
         Report::create($request->all());
 
         // Redireccionar a la vista de listado de estudiantes
-        return redirect()->route('reports.index');
+        return redirect()->route('admin.reports.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -68,7 +65,7 @@ class ReportController extends Controller
         $courses = Course::all();
         $students = Student::all();
         $reports = Report::findOrFail($id);
-        return view('reports.edit', compact('reports', 'courses', 'students'));
+        return view('admin.reports.edit', compact('reports', 'courses', 'students'));
     }
 
     /**
@@ -76,8 +73,8 @@ class ReportController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // Validar los datos del formulario
-        $request->validate([
+         // Validar los datos del formulario
+         $request->validate([
             'nombre' => 'required|string|min:5|max:50',
             'fecha' => 'required|date',
             'item' => 'required|in:A-P 1,A-P 2,A-P 3,A-P 4,A-P 5,A-P 6,S-D 1,S-D 2,S-D 3,S-D 4,S-D 5,S-D 6,S-D 7,S-D 8',
@@ -95,7 +92,7 @@ class ReportController extends Controller
         $reports->update($request->all());
 
         // Redireccionar a la vista de listado de estudiantes
-        return redirect()->route('reports.index');
+        return redirect()->route('admin.reports.index');
     }
 
     /**
@@ -107,6 +104,6 @@ class ReportController extends Controller
 
         $reports->delete();
 
-        return redirect()->route('reports.index');
+        return redirect()->route('admin.reports.index');
     }
 }
