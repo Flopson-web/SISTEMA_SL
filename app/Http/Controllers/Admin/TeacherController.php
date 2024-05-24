@@ -45,7 +45,7 @@ class TeacherController extends Controller
         Teacher::create($request->all());
 
         // Redireccionar a la vista de listado de profesor
-        return redirect()->route('admin.teachers.index');
+        return redirect()->route('teachers.index');
 
     }
 
@@ -82,7 +82,7 @@ class TeacherController extends Controller
         $teachers->update($request->all());
 
         // Redireccionar a la vista de listado de estudiantes
-        return redirect()->route('admin.teachers.index');
+        return redirect()->route('teachers.index');
     }
 
     /**
@@ -94,6 +94,6 @@ class TeacherController extends Controller
 
         $teachers->delete();
 
-        return redirect()->route('admin.teachers.index');
+        return redirect()->route('teachers.index');
     }
 }

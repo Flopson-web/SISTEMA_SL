@@ -50,7 +50,7 @@ class ReportController extends Controller
         Report::create($request->all());
 
         // Redireccionar a la vista de listado de estudiantes
-        return redirect()->route('admin.reports.index');
+        return redirect()->route('reports.index');
     }
 
     /**
@@ -92,7 +92,7 @@ class ReportController extends Controller
         $reports->update($request->all());
 
         // Redireccionar a la vista de listado de estudiantes
-        return redirect()->route('admin.reports.index');
+        return redirect()->route('reports.index');
     }
 
     /**
@@ -104,6 +104,6 @@ class ReportController extends Controller
 
         $reports->delete();
 
-        return redirect()->route('admin.reports.index');
+        return redirect()->route('reports.index');
     }
 }

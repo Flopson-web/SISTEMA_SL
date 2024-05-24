@@ -66,7 +66,7 @@ class StudentController extends Controller
         Student::create($request->all());
 
         // Redireccionar a la vista de listado de estudiantes
-        return redirect()->route('admin.students.index');
+        return redirect()->route('students.index');
     }
 
     /**
@@ -129,7 +129,7 @@ class StudentController extends Controller
         $students->update($request->all());
 
         // Redireccionar a la vista de listado de estudiantes
-        return redirect()->route('admin.students.index');
+        return redirect()->route('students.index');
     }
 
     /**
@@ -141,6 +141,6 @@ class StudentController extends Controller
 
         $students->delete();
 
-        return redirect()->route('admin.students.index');
+        return redirect()->route('students.index');
     }
 }

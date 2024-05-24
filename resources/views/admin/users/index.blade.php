@@ -50,3 +50,22 @@
     </div>
 </x-app-layout>
 
+<script>
+    // forma 2
+    function confirmDelete(id) {
+        alertify.confirm("¿Confirm delete record?", function (e) {
+            if (e) {
+                let form = document.createElement('form');
+                form.method = 'POST';
+                form.action = '/users/' + id;
+                form.innerHTML = '@csrf @method("DELETE")';
+                document.body.appendChild(form);
+                form.submit();
+            } else {
+                alertify.error('Cancel');
+                return false;
+            }
+        });
+    } 
+    
+    </script>

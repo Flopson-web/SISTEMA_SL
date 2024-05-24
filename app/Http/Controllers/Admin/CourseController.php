@@ -46,7 +46,7 @@ class CourseController extends Controller
         Course::create($request->all());
 
         // Redireccionar a la vista de listado de estudiantes
-        return redirect()->route('admin.courses.index');
+        return redirect()->route('courses.index');
     }
 
     /**
@@ -84,7 +84,7 @@ class CourseController extends Controller
         $courses->update($request->all());
 
         // Redireccionar a la vista de listado de estudiantes
-        return redirect()->route('admin.courses.index');
+        return redirect()->route('courses.index');
     }
     
 
@@ -97,6 +97,6 @@ class CourseController extends Controller
 
         $courses->delete();
 
-        return redirect()->route('admin.courses.index');
+        return redirect()->route('courses.index');
     }
 }
