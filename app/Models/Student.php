@@ -46,6 +46,6 @@ class Student extends Model
     }
     //relacion uno a muchos
     public function reports(){
-        return $this->hasMany(Report::class, 'report_id');
+        return $this->hasMany(Report::class, 'student_id');
     }
 }

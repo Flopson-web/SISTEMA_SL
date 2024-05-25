@@ -111,6 +111,7 @@
                                 <th class="px-4 py-2 text-gray-900 dark:text-white text-center">Detalle/Observaciones</th>
                                 <th class="px-4 py-2 text-gray-900 dark:text-white text-center">Student</th>
                                 <th class="px-4 py-2 text-gray-900 dark:text-white text-center">Course</th>
+                                <th class="px-4 py-2 text-gray-900 dark:text-white text-center">Profesor</th>
                                 <th class="px-4 py-2 text-gray-900 dark:text-white text-center">Options</th>
                             </tr>
                         </thead>
@@ -125,6 +126,7 @@
                                 <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">{{ $reports->detalle_observaciones }}</td>
                                 <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">{{ $reports->students->nombre }}</td>
                                 <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">{{ $reports->courses->nombre_curso }}</td>
+                                <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">{{ $reports->teacher->nombre }}</td>
 
                                 <td class="border px-4 py-2 text-center">
                                     <div class="flex justify-center">

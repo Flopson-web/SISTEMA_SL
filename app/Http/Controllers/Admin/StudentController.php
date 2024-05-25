@@ -118,7 +118,6 @@ class StudentController extends Controller
             'nro_dosis_covid' => 'nullable|integer',
             'vive_con' => 'nullable|in:Padres,Abuelos,Tíos,Hermanos,Otros',
             'religion' => 'nullable|in:Católica,Evangélica,Otra',
-            'user_id' => 'required|exists:users,id',
             'course_id' => 'required|exists:courses,id',
         ]);
 

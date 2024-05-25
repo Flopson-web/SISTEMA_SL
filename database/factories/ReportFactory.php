@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Student;
 use App\Models\Course;
+use App\Models\Teacher;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -26,7 +27,8 @@ class ReportFactory extends Factory
                 'trimestre' => $this->faker->randomElement(['1ER', '2DO', '3ER']),
                 'detalle_observaciones' => $this->faker->text,
                 'student_id' => Student::all() -> random()->id,
-                'course_id' => Course::all() -> random()->id
+                'course_id' => Course::all() -> random()->id,
+                'teacher_id' => Teacher::all() -> random()->id
         ];
     }
 }

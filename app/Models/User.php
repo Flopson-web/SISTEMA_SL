@@ -9,10 +9,12 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     use HasApiTokens;
+    use HasRoles;
     use HasFactory;
     use HasProfilePhoto;
     use Notifiable;
@@ -64,7 +66,7 @@ class User extends Authenticatable
     }
     //Relacion uno a uno
     public function teacher(){
-        return $this->hasOne(Teacher::class);
+        return $this->hasOne(Teacher::class, 'user_id');
     }
 
     public function student(){

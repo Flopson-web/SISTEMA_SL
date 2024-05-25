@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Report;
 use App\Models\Student;
 use App\Models\Course;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
@@ -26,7 +27,8 @@ class ReportController extends Controller
     {
         $courses = Course::all();
         $students = Student::all();
-        return view('admin.reports.create', compact('courses', 'students'));
+        $teachers = Teacher::all();
+        return view('admin.reports.create', compact('courses', 'students', 'teachers'));
     }
 
     /**
@@ -44,6 +46,7 @@ class ReportController extends Controller
             'detalle_observaciones' => 'nullable|string',
             'student_id' => 'required|exists:students,id',
             'course_id' => 'required|exists:courses,id',
+            'teacher_id' => 'required|exists:teachers,id',
         ]);
 
          // Crear un nuevo reporte usando el método `create` del modelo
@@ -64,8 +67,9 @@ class ReportController extends Controller
     {
         $courses = Course::all();
         $students = Student::all();
+        $teachers = Teacher::all();
         $reports = Report::findOrFail($id);
-        return view('admin.reports.edit', compact('reports', 'courses', 'students'));
+        return view('admin.reports.edit', compact('reports', 'courses', 'students', 'teachers'));
     }
 
     /**
@@ -83,6 +87,7 @@ class ReportController extends Controller
             'detalle_observaciones' => 'nullable|string',
             'student_id' => 'required|exists:students,id',
             'course_id' => 'required|exists:courses,id',
+            'teacher_id' => 'required|exists:teachers,id',
         ]);
 
         // Buscar el estudiante por su ID

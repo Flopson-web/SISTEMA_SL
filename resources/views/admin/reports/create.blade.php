@@ -148,7 +148,7 @@
                             </div>
 
                             <div class="mb-5">
-                                <label for="student_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Student ID</label>
+                                <label for="student_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Student</label>
                                 <select name="student_id" id="student_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                                     <option value="">Select Student</option>
                                     @foreach ($students as $student)
@@ -158,11 +158,21 @@
                             </div>
 
                             <div class="mb-5">
-                                <label for="course_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Course ID</label>
+                                <label for="course_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Course</label>
                                 <select name="course_id" id="course_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                                     <option value="">Select Course</option>
                                     @foreach ($courses as $course)
                                         <option value="{{ $course->id }}">{{ $course->nombre_curso }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="mb-5">
+                                <label for="teacher_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Teacher</label>
+                                <select name="teacher_id" id="teacher_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                                    <option value="">Select Teacher</option>
+                                    @foreach ($teachers as $teacher)
+                                        <option value="{{ $teacher->id }}">{{ $teacher->nombre }}</option>
                                     @endforeach
                                 </select>
                             </div>
