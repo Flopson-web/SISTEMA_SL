@@ -14,7 +14,8 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::all();
+        
+        $courses = Course::paginate(9);
         return view('admin.courses.index', compact('courses'));
     }
 
@@ -23,8 +24,8 @@ class CourseController extends Controller
      */
     public function create()
     {
-        $asesores = Teacher::all();
-        return view('admin.courses.create', compact('asesores'));
+        $teachers = Teacher::all();
+        return view('admin.courses.create', compact('teachers'));
     }
 
     /**
@@ -46,7 +47,7 @@ class CourseController extends Controller
         Course::create($request->all());
 
         // Redireccionar a la vista de listado de estudiantes
-        return redirect()->route('courses.index');
+        return redirect()->route('courses.index')->with('success', 'Course created successfully.');
     }
 
     /**

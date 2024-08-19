@@ -11,35 +11,48 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Teacher_CourseController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+    //return view('home');
+//})->name('home');
+
 
 
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])->group(function () {
-    Route::get('/dashboard', function () {return view('dashboard');})->name('dashboard');
-    
-    Route::resource('courses', CourseController::class);
-    Route::resource('students', StudentController::class)->except(['show']);
-    Route::get('/students/{id}', [StudentController::class, 'show'])->name('students.show');
-    Route::resource('reports', ReportController::class);
-    Route::resource('users', UserController::class);
-    Route::resource('teachers',TeacherController::class);
-});
 
-Route::prefix('teachers_courses')->group(function () {
-    Route::get('/', [TeacherCourseController::class, 'index'])->name('teachers_courses.index');
-    Route::get('/{course}', [TeacherCourseController::class, 'show'])->name('teachers_courses.show');
-    Route::get('/{course}/students/create', [TeacherCourseController::class, 'createStudent'])->name('teachers_courses.students.create');
-    Route::get('/{course}/students/{student}/edit', [TeacherCourseController::class, 'editStudent'])->name('teachers_courses.students.edit');
-    Route::put('/teachers/courses/{course}/students/{student}', [TeacherCourseController::class, 'updateStudent'])->name('teachers_courses.students.update');
-    Route::post('/teachers/courses/{course}/students', [TeacherCourseController::class, 'storeStudent'])->name('teachers_courses.students.store');
-    Route::get('/{course}/students/{student}/reports', [TeacherCourseController::class, 'showReports'])->name('teachers_courses.reports.index');
-    Route::get('/{course}/students/{student}/reports/create', [TeacherCourseController::class, 'createReport'])->name('teachers_courses.reports.create');
-    Route::post('/teachers/courses/{course}/students/{student}/reports', [TeacherCourseController::class, 'storeReport'])->name('teachers_courses.reports.store');
-});
+    Route::get('/', function () {
+    return view('welcome');
+    });
+ 
+    // Rutas de Admin
+   // Route::middleware(['role:admin'])->prefix('admin')->name('admin.')->group(function () {
+        Route::resource('courses', CourseController::class);
+        Route::resource('students', StudentController::class)->except(['show']);
+        Route::get('/students/{id}', [StudentController::class, 'show'])->name('students.show');
+        Route::resource('reports', ReportController::class);
+        Route::resource('users', UserController::class);
+        Route::resource('teachers', TeacherController::class);
+    //});
 
-Route::prefix('just_students')->group(function (){
-    Route::get('/', [StudentStudentController::class, 'index'])->name('just_studnets.index');
-    Route::get('/', [StudentStudentController::class, 'reports'])->name('just_students.reports');
+    // Rutas de Teachers y Asesores
+    //Route::middleware(['role:teacher|asesor'])->prefix('teachers_courses')->name('teachers_courses.')->group(function () {
+    Route::prefix('teachers_courses')->name('teachers_courses.')->group(function () {
+        Route::get('/', [TeacherCourseController::class, 'index'])->name('index');
+        Route::get('/{course}', [TeacherCourseController::class, 'show'])->name('show');
+        Route::get('/{course}/students/create', [TeacherCourseController::class, 'createStudent'])->name('students.create');
+        Route::get('/{course}/students/{student}/edit', [TeacherCourseController::class, 'editStudent'])->name('students.edit');
+        Route::put('/teachers/courses/{course}/students/{student}', [TeacherCourseController::class, 'updateStudent'])->name('students.update');
+        Route::post('/teachers/courses/{course}/students', [TeacherCourseController::class, 'storeStudent'])->name('students.store');
+        Route::get('/{course}/students/{student}/reports', [TeacherCourseController::class, 'showReports'])->name('reports.index');
+        Route::get('/{course}/students/{student}/reports/create', [TeacherCourseController::class, 'createReport'])->name('reports.create');
+        Route::post('/teachers/courses/{course}/students/{student}/reports', [TeacherCourseController::class, 'storeReport'])->name('reports.store');
+    });
+    //});
+
+    // Rutas de Students
+    //Route::middleware(['role:student'])->prefix('just_students')->name('just_students.')->group(function () {
+    Route::prefix('just_students')->name('just_students.')->group(function () {
+        Route::get('/', [StudentStudentController::class, 'index'])->name('index');
+        Route::get('/reports', [StudentStudentController::class, 'reports'])->name('reports');
+    });
+    //});
 });

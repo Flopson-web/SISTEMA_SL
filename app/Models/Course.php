@@ -31,11 +31,12 @@ class Course extends Model
         return $this->hasMany(Report::class, 'course_id');
     }
 
-    //relacion uno a muchos
+    // Relación uno a muchos inversa con Teacher como asesor1
     public function asesor1(){
         return $this->belongsTo(Teacher::class, 'asesor_id_1');
     }
 
+    // Relación uno a muchos inversa con Teacher como asesor2
     public function asesor2(){
         return $this->belongsTo(Teacher::class, 'asesor_id_2');
     }

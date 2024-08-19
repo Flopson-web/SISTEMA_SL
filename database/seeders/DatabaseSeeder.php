@@ -17,11 +17,31 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(UserSedeer::class);
-        Teacher::factory(20)->create();
+        $this->call(RoleSedeer::class);
+
+        // Crear usuarios
+        User::factory(50)->create();
+
+        // Crear profesores
+        Teacher::factory(30)->create();
+
+        // Crear cursos
         Course::factory(15)->create();
-        Student::factory(30)->create();
-        Report::factory(99)->create();
+
+        // Crear estudiantes y reportes
+        Student::factory(80)->create();
+        Report::factory(200)->create();
+
+        // Asignar profesores a cursos como asesores y profesores normales
         $this->call(CourseSedeer::class);
+        $this->call(UserSedeer::class);
+
+        // Asignar profesores normales a cursos
+        $teachers = Teacher::all();
+        $courses = Course::all();
+
+        foreach ($courses as $course) {
+            $course->teachers()->attach($teachers->random(3)->pluck('id')->toArray());
+        }
     }
 }

@@ -19,6 +19,10 @@ class ReportFactory extends Factory
      */
     public function definition(): array
     {
+        $student = Student::inRandomOrder()->first();
+        $course = Course::inRandomOrder()->first();
+        $teacher = Teacher::inRandomOrder()->first();
+
         return [
                 'nombre' => $this->faker->word,
                 'fecha' => $this->faker->date(),
@@ -26,9 +30,9 @@ class ReportFactory extends Factory
                 'area' => $this->faker->word,
                 'trimestre' => $this->faker->randomElement(['1ER', '2DO', '3ER']),
                 'detalle_observaciones' => $this->faker->text,
-                'student_id' => Student::all() -> random()->id,
-                'course_id' => Course::all() -> random()->id,
-                'teacher_id' => Teacher::all() -> random()->id
+                'student_id' => $student->id,
+                'course_id' => $course->id,
+                'teacher_id' => $teacher->id
         ];
     }
 }

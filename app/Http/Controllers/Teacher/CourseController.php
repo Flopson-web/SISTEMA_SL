@@ -63,8 +63,8 @@ class CourseController extends Controller
             'trabaja' => 'nullable|in:Sí,No',
             'lugar_trabajo' => 'nullable|string|max:255',
             'nro_dosis_covid' => 'nullable|integer',
-            'vive_con' => 'nullable|in:Padres,Abuelos,Tíos,Hermanos,Otros',
-            'religion' => 'nullable|in:Católica,Evangélica,Otra',
+            'vive_con' => 'nullable|in:Padres,Abuelos,Tios,Hermanos,Otros',
+            'religion' => 'nullable|in:Catolica,Evangelica,Otra',
             'user_id' => 'required|exists:users,id',
            
         ]);
@@ -109,8 +109,8 @@ class CourseController extends Controller
             'trabaja' => 'nullable|in:Sí,No',
             'lugar_trabajo' => 'nullable|string|max:255',
             'nro_dosis_covid' => 'nullable|integer',
-            'vive_con' => 'nullable|in:Padres,Abuelos,Tíos,Hermanos,Otros',
-            'religion' => 'nullable|in:Católica,Evangélica,Otra',
+            'vive_con' => 'nullable|in:Padres,Abuelos,Tios,Hermanos,Otros',
+            'religion' => 'nullable|in:Catolica,Evangelica,Otra',
             'user_id' => 'required|exists:users,id',
             
         ]);

@@ -100,8 +100,8 @@
         <div class="form-group">
             <label for="religion">Religión</label>
             <select class="form-control" id="religion" name="religion">
-            <option value="Católica" {{ $student->religion == 'Católica' ? 'selected' : '' }}>Católica</option>
-            <option value="Evangélica" {{ $student->religion == 'Evangélica' ? 'selected' : '' }}>Evangélica</option>
+            <option value="Catolica" {{ $student->religion == 'Catolica' ? 'selected' : '' }}>Católica</option>
+            <option value="Evangelica" {{ $student->religion == 'Evangelica' ? 'selected' : '' }}>Evangélica</option>
             <option value="Otra" {{ $student->religion == 'Otra' ? 'selected' : '' }}>Otra</option>
             </select>
         </div>

@@ -17,13 +17,16 @@ class TeacherFactory extends Factory
      */
     public function definition(): array
     {
+        $user = User::factory()->create();
+
+
         return [
-                'nombre' => $this->faker->name,
-                'apellido' => $this->faker->lastName,
-                'especialidad' => $this->faker->jobTitle,
-                'edad' => $this->faker->numberBetween(25, 60),
-                'celular' => $this->faker->numberBetween(100000, 6000000),
-                'user_id' => User::all()->random()->id,        
+            'nombre' => $this->faker->name,
+            'apellido' => $this->faker->lastName,
+            'especialidad' => $this->faker->jobTitle,
+            'edad' => $this->faker->numberBetween(25, 60),
+            'celular' => $this->faker->numberBetween(100000, 6000000),
+            'user_id' => $user->id,
         ];
     }
 }
