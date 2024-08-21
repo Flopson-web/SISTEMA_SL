@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Student;
 use App\Models\Course;
 use App\Models\User;
+use App\Models\Report;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -15,7 +16,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::all();
+        $students = Student::paginate(10);
         return view ('admin.students.index', compact('students'));
     }
 
@@ -53,11 +54,11 @@ class StudentController extends Controller
             'direccion_actual' => 'nullable|string|max:255',
             'telefono_casa' => 'nullable|integer',
             'celular_estudiante' => 'nullable|integer',
-            'trabaja' => 'nullable|in:Sí,No',
+            'trabaja' => 'nullable|in:Si,No',
             'lugar_trabajo' => 'nullable|string|max:255',
             'nro_dosis_covid' => 'nullable|integer',
-            'vive_con' => 'nullable|in:Padres,Abuelos,Tíos,Hermanos,Otros',
-            'religion' => 'nullable|in:Católica,Evangélica,Otra',
+            'vive_con' => 'nullable|in:Padres,Abuelos,Tios,Hermanos,Otros',
+            'religion' => 'nullable|in:Catolica,Evangelica,Otra',
             'user_id' => 'required|exists:users,id',
             'course_id' => 'required|exists:courses,id',
         ]);
@@ -113,11 +114,11 @@ class StudentController extends Controller
             'direccion_actual' => 'nullable|string|max:255',
             'telefono_casa' => 'nullable|integer',
             'celular_estudiante' => 'nullable|integer',
-            'trabaja' => 'nullable|in:Sí,No',
+            'trabaja' => 'nullable|in:Si,No',
             'lugar_trabajo' => 'nullable|string|max:255',
             'nro_dosis_covid' => 'nullable|integer',
-            'vive_con' => 'nullable|in:Padres,Abuelos,Tíos,Hermanos,Otros',
-            'religion' => 'nullable|in:Católica,Evangélica,Otra',
+            'vive_con' => 'nullable|in:Padres,Abuelos,Tios,Hermanos,Otros',
+            'religion' => 'nullable|in:Catolica,Evangelica,Otra',
             'course_id' => 'required|exists:courses,id',
         ]);
 
@@ -142,4 +143,11 @@ class StudentController extends Controller
 
         return redirect()->route('students.index');
     }
+
+    public function showReports($id)
+{
+    $student = Student::findOrFail($id);
+    $reports = Report::where('student_id', $id)->get();
+    return view('admin.students.reports', compact('student', 'reports'));
+}
 }

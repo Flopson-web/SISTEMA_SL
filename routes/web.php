@@ -28,6 +28,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
         Route::resource('courses', CourseController::class);
         Route::resource('students', StudentController::class)->except(['show']);
         Route::get('/students/{id}', [StudentController::class, 'show'])->name('students.show');
+        Route::get('/students/{id}/reports', [StudentController::class, 'showReports'])->name('admin.students.reports');
         Route::resource('reports', ReportController::class);
         Route::resource('users', UserController::class);
         Route::resource('teachers', TeacherController::class);
@@ -55,4 +56,8 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
         Route::get('/reports', [StudentStudentController::class, 'reports'])->name('reports');
     });
     //});
+
+    //Route::get('offline', function (){
+    //    return view('vendor.laravelpwa.offline');
+   // });
 });

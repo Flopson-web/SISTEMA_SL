@@ -1,134 +1,108 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-white leading-tight">
             {{ __('Student Details') }}
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-12 bg-gradient-to-br from-black via-cyan-500 to-yellow-500 animate-gradient" style="background-size: 200% 200%; background-attachment: fixed;">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg p-6 lg:p-8">
-                <div class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
-
+            <div class="bg-red-600 dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg p-6 lg:p-8">
+                <div class="bg-black dark:bg-gray-700 border border-yellow-400 rounded-lg p-6 shadow-lg text-white">
                     @if ($student !== null)
-                    <table class="table table-striped">
-                        <tr>
-                            <th>Nombre</th>
-                            <td>{{ $student->nombre }}</td>
-                        </tr>
-                        <tr>
-                            <th>Apellido</th>
-                            <td>{{ $student->apellido }}</td>
-                        </tr>
-                        <tr>
-                            <th>Foto</th>
-                            <td><img src="{{ $student->foto }}" alt="Foto del Estudiante" style="width: 100px;"></td>
-                        </tr>
-                        <tr>
-                            <th>Edad</th>
-                            <td>{{ $student->edad }}</td>
-                        </tr>
-                        <tr>
-                            <th>Número de Lista</th>
-                            <td>{{ $student->nro_de_lista }}</td>
-                        </tr>
-                        <tr>
-                            <th>Nombre del Padre</th>
-                            <td>{{ $student->nombre_padre }}</td>
-                        </tr>
-                        <tr>
-                            <th>Trabajo del Padre</th>
-                            <td>{{ $student->trabajo_padre }}</td>
-                        </tr>
-                        <tr>
-                            <th>Celular del Padre</th>
-                            <td>{{ $student->celular_padre }}</td>
-                        </tr>
-                        <tr>
-                            <th>Nombre de la Madre</th>
-                            <td>{{ $student->nombre_madre }}</td>
-                        </tr>
-                        <tr>
-                            <th>Trabajo de la Madre</th>
-                            <td>{{ $student->trabajo_madre }}</td>
-                        </tr>
-                        <tr>
-                            <th>Celular de la Madre</th>
-                            <td>{{ $student->celular_madre }}</td>
-                        </tr>
-                        <tr>
-                            <th>Número Total de Hermanos</th>
-                            <td>{{ $student->nro_total_hermanos }}</td>
-                        </tr>
-                        <tr>
-                            <th>Lugar que Ocupa</th>
-                            <td>{{ $student->lugar_que_ocupa }}</td>
-                        </tr>
-                        <tr>
-                            <th>Hermanos en el Colegio</th>
-                            <td>{{ $student->hermanos_en_colegio }}</td>
-                        </tr>
-                        <tr>
-                            <th>Dirección Actual</th>
-                            <td>{{ $student->direccion_actual }}</td>
-                        </tr>
-                        <tr>
-                            <th>Teléfono de Casa</th>
-                            <td>{{ $student->telefono_casa }}</td>
-                        </tr>
-                        <tr>
-                            <th>Celular del Estudiante</th>
-                            <td>{{ $student->celular_estudiante }}</td>
-                        </tr>
-                        <tr>
-                            <th>Trabaja</th>
-                            <td>{{ $student->trabaja }}</td>
-                        </tr>
-                        <tr>
-                            <th>Lugar de Trabajo</th>
-                            <td>{{ $student->lugar_trabajo }}</td>
-                        </tr>
-                        <tr>
-                            <th>Número de Dosis de COVID</th>
-                            <td>{{ $student->nro_dosis_covid }}</td>
-                        </tr>
-                        <tr>
-                            <th>Vive con</th>
-                            <td>{{ $student->vive_con }}</td>
-                        </tr>
-                        <tr>
-                            <th>Religión</th>
-                            <td>{{ $student->religion }}</td>
-                        </tr>
-                        <tr>
-                            <th>Curso</th>
-                            <td>{{ $student->courses->nombre_curso }}</td>
-                        </tr>
-                        <tr>
-                            <th>User</th>
-                            <td> @if($student->user)
-                                {{ $student->user->name }}
-                            @else
-                                Usuario no asignado
-                            @endif
-                            </td>
-                        </tr>
-                    </table>
-                @else
-                    <p>Estudiante no encontrado</p>
-                @endif
-            
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-4 border-b border-yellow-400 pb-2">Información Personal</h3>
+                            <p><strong>Nombre:</strong> {{ $student->nombre }}</p>
+                            <p><strong>Apellido:</strong> {{ $student->apellido }}</p>
+                            <p><strong>Edad:</strong> {{ $student->edad }}</p>
+                            <p><strong>Número de Lista:</strong> {{ $student->nro_de_lista }}</p>
+                            <p><strong>Celular del Estudiante:</strong> {{ $student->celular_estudiante }}</p>
+                            <p><strong>Dirección Actual:</strong> {{ $student->direccion_actual }}</p>
+                            <p><strong>Teléfono de Casa:</strong> {{ $student->telefono_casa }}</p>
+                            <p><strong>Vive con:</strong> {{ $student->vive_con }}</p>
+                            <p><strong>Religión:</strong> {{ $student->religion }}</p>
+                        </div>
+                        <div class="text-center">
+                            <h3 class="text-2xl font-semibold mb-4 border-b border-yellow-400 pb-2">Foto del Estudiante</h3>
+                            <div class="flex justify-center mb-4">
+                                <img src="{{ $student->foto }}" alt="Foto del Estudiante" class="rounded-full w-40 h-40 object-cover border-4 border-yellow-400">
+                            </div>
+                            <p><strong>Curso:</strong> {{ $student->courses->nombre_curso }}</p>
+                            <p><strong>Usuario:</strong> 
+                                @if($student->user)
+                                    {{ $student->user->name }}
+                                @else
+                                    Usuario no asignado
+                                @endif
+                            </p>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <h3 class="text-2xl font-semibold mb-4 border-b border-yellow-400 pb-2">Información Familiar</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <p><strong>Nombre del Padre:</strong> {{ $student->nombre_padre }}</p>
+                                <p><strong>Trabajo del Padre:</strong> {{ $student->trabajo_padre }}</p>
+                                <p><strong>Celular del Padre:</strong> {{ $student->celular_padre }}</p>
+                            </div>
+                            <div>
+                                <p><strong>Nombre de la Madre:</strong> {{ $student->nombre_madre }}</p>
+                                <p><strong>Trabajo de la Madre:</strong> {{ $student->trabajo_madre }}</p>
+                                <p><strong>Celular de la Madre:</strong> {{ $student->celular_madre }}</p>
+                            </div>
+                        </div>
+                        <div class="mt-6">
+                            <p><strong>Número Total de Hermanos:</strong> {{ $student->nro_total_hermanos }}</p>
+                            <p><strong>Lugar que Ocupa entre los Hermanos:</strong> {{ $student->lugar_que_ocupa }}</p>
+                            <p><strong>Hermanos en el Colegio:</strong> {{ $student->hermanos_en_colegio }}</p>
+                        </div>
+                    </div>
 
+                    <div class="mt-6">
+                        <h3 class="text-2xl font-semibold mb-4 border-b border-yellow-400 pb-2">Información de Trabajo y Salud</h3>
+                        <div>
+                            <p><strong>Trabaja:</strong> {{ $student->trabaja }}</p>
+                            <p><strong>Lugar de Trabajo:</strong> {{ $student->lugar_trabajo }}</p>
+                            <p><strong>Número de Dosis de COVID:</strong> {{ $student->nro_dosis_covid }}</p>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end mt-8">
+                        <a href="{{ route('students.edit', $student->id) }}" class="bg-yellow-500 hover:bg-yellow-700 text-black font-bold py-2 px-4 rounded">
+                            Editar
+                        </a>
+                    </div>
+
+                    <div class="flex justify-end mt-8">
+                        <a href="{{ route('admin.students.reports', $student->id) }}" class="bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded">
+                            Ver Reportes
+                        </a>
+                    </div>
+
+                    @else
+                        <p>Estudiante no encontrado</p>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="flex justify-end mt-4">
-        <a href="{{ route('students.edit', $student->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Editar
-        </a>
-    </div>
-
 </x-app-layout>
 
+<style>
+    .animate-gradient {
+        animation: gradientAnimation 10s ease infinite;
+    }
+
+    @keyframes gradientAnimation {
+        0% {
+            background-position: 0% 0%;
+        }
+        50% {
+            background-position: 100% 100%;
+        }
+        100% {
+            background-position: 0% 0%;
+        }
+    }
+</style>

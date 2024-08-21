@@ -21,6 +21,7 @@
         <!-- Styles -->
         @livewireStyles
         <link href="{{ asset('css/alertify.min.css') }}" rel="stylesheet">
+        @laravelPWA
     </head>
     <body class="font-sans antialiased">
         <x-banner />
