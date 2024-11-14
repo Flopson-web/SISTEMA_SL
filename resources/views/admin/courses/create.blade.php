@@ -75,7 +75,14 @@
                     </div>
 
                     <div class="flex justify-end">
-                        <button type="submit" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded">Save Course</button>
+                        <button type="submit" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded">Crear Curso</button><br>
+
+                        <div class="flex justify-end">
+                            <a href="{{ route('courses.index')}}" class="bg-yellow-500 hover:bg-yellow-700 text-black font-bold py-2 px-4 rounded">
+                                Volver
+                            </a>
+                        </div>
+
                     </div>
                 </form>
             </div>

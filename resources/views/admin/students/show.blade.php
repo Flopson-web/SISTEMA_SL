@@ -75,8 +75,14 @@
                     </div>
 
                     <div class="flex justify-end mt-8">
-                        <a href="{{ route('admin.students.reports', $student->id) }}" class="bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded">
+                        <a href="{{ route('admin.students.reports', $student->id) }}" class="bg-yellow-500 hover:bg-yellow-700 text-black font-bold py-2 px-4 rounded">
                             Ver Reportes
+                        </a>
+                    </div>
+
+                    <div class="flex justify-end mt-8">
+                        <a href="{{ route('students.index')}}" class="bg-yellow-500 hover:bg-yellow-700 text-black font-bold py-2 px-4 rounded">
+                            Volver
                         </a>
                     </div>
 

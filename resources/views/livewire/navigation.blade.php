@@ -25,11 +25,11 @@
                     <div class="flex space-x-4">
                         <!-- Elementos de navegación con color blanco -->
                         <!--<a href="/" class="text-white rounded-md px-3 py-2 text-sm font-medium hover:bg-red-700" aria-current="page">Dashboard</a>-->
-                        <a href="{{route('users.index')}}" class="text-white rounded-md px-3 py-2 text-sm font-medium hover:bg-red-700">Users</a>
-                        <a href="{{route('teachers.index')}}" class="text-white rounded-md px-3 py-2 text-sm font-medium hover:bg-red-700">Teachers</a>
-                        <a href="{{route('students.index')}}" class="text-white rounded-md px-3 py-2 text-sm font-medium hover:bg-red-700">Students</a>
-                        <a href="{{route('courses.index')}}" class="text-white rounded-md px-3 py-2 text-sm font-medium hover:bg-red-700">Courses</a>
-                        <a href="{{route('reports.index')}}" class="text-white rounded-md px-3 py-2 text-sm font-medium hover:bg-red-700">Reports</a>
+                        <a href="{{route('users.index')}}" class="text-white rounded-md px-3 py-2 text-sm font-medium hover:bg-red-700">USUARIOS</a>
+                        <a href="{{route('teachers.index')}}" class="text-white rounded-md px-3 py-2 text-sm font-medium hover:bg-red-700">PROFESORES</a>
+                        <a href="{{route('students.index')}}" class="text-white rounded-md px-3 py-2 text-sm font-medium hover:bg-red-700">ESTUDIANTES</a>
+                        <a href="{{route('courses.index')}}" class="text-white rounded-md px-3 py-2 text-sm font-medium hover:bg-red-700">CURSOS</a>
+                        <a href="{{route('reports.index')}}" class="text-white rounded-md px-3 py-2 text-sm font-medium hover:bg-red-700">REPORTES</a>
                     </div>
                 </div>
             </div>
@@ -78,11 +78,11 @@
     <div class="sm:hidden" id="mobile-menu" x-show="open" x-on:click.away="open=false">
         <div class="space-y-1 px-2 pb-3 pt-2">
             <!--<a href="/" class="bg-white text-red-500 block rounded-md px-3 py-2 text-base font-medium">Dashboard</a>-->
-            <a href="{{route('users.index')}}" class="bg-white text-red-500 block rounded-md px-3 py-2 text-base font-medium">Users</a>
-            <a href="{{route('teachers.index')}}" class="bg-white text-red-500 block rounded-md px-3 py-2 text-base font-medium">Teachers</a>
-            <a href="{{route('students.index')}}" class="bg-white text-red-500 block rounded-md px-3 py-2 text-base font-medium">Students</a>
-            <a href="{{route('courses.index')}}" class="bg-white text-red-500 block rounded-md px-3 py-2 text-base font-medium">Courses</a>
-            <a href="{{route('reports.index')}}" class="bg-white text-red-500 block rounded-md px-3 py-2 text-base font-medium">Reports</a>
+            <a href="{{route('users.index')}}" class="bg-white text-red-500 block rounded-md px-3 py-2 text-base font-medium">USUARIOS</a>
+            <a href="{{route('teachers.index')}}" class="bg-white text-red-500 block rounded-md px-3 py-2 text-base font-medium">PROFESORES</a>
+            <a href="{{route('students.index')}}" class="bg-white text-red-500 block rounded-md px-3 py-2 text-base font-medium">ESTUDIANTES</a>
+            <a href="{{route('courses.index')}}" class="bg-white text-red-500 block rounded-md px-3 py-2 text-base font-medium">CURSOS</a>
+            <a href="{{route('reports.index')}}" class="bg-white text-red-500 block rounded-md px-3 py-2 text-base font-medium">REPORTES</a>
         </div>
     </div>
 </nav>

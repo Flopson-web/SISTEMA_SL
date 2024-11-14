@@ -14,10 +14,39 @@ class ReportController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $reports = Report::paginate(10);
-        return view ('admin.reports.index', compact('reports'));
+        // Inicializa la consulta base
+        $query = Report::query();
+
+
+        // Filtrar por fechas (rango entre fecha_inicio y fecha_fin)
+        if ($request->filled('fecha')) {
+            $query->where('fecha', $request->fecha);
+        }
+
+        // Filtrar por trimestre
+        if ($request->filled('trimestre')) {
+            $query->where('trimestre', $request->trimestre);
+        }
+
+        // Filtrar por área (las áreas existentes en la base de datos)
+        if ($request->filled('area')) {
+            $query->where('area', $request->area);
+        }
+
+        // Obtener las áreas únicas de la base de datos
+        $areas = Report::select('area')->distinct()->pluck('area');
+
+        // Ordenar por la fecha más reciente, incluso si no hay filtros
+        $query->orderBy('fecha', 'desc');
+
+        // Obtener los reportes con los filtros aplicados y paginar
+        $reports = $query->paginate(10);
+
+        // Retornar la vista con los reportes filtrados y las áreas disponibles
+        return view('admin.reports.index', compact('reports', 'areas'));
+    
     }
 
     /**

@@ -13,6 +13,53 @@
                     <input type="text" id="search" placeholder="Buscar reportes..." class="w-full p-3 rounded border border-gray-300 bg-gray-700 text-white">
                 </div>
 
+                 <!-- Formulario de filtros -->
+                 <form method="GET" action="{{ route('reports.index') }}">
+                    <div class="grid grid-cols-3 gap-4 mb-6 focus:outline-none">
+                        
+                            
+
+                            <!-- Filtro por fecha -->
+                            <div class="col-span-1 focus:outline-none">
+                                <label for="fecha" class="block text-sm font-bold text-gray-200 mb-2">Fecha</label>
+                                <input type="date" name="fecha" id="fecha" value="{{ request('fecha') }}" 
+                                    class="w-full p-3 rounded bg-gray-700 text-white focus:outline-none">
+                            </div>
+
+                            <!-- Filtro por trimestre -->
+                            <div class="col-span-1 focus:outline-none">
+                                <label for="trimestre" class="block text-sm font-bold text-gray-200 mb-2">Trimestre</label>
+                                <select name="trimestre" class="w-full p-3 rounded bg-gray-700 text-white focus:outline-none">
+                                    <option value="">Seleccionar trimestre</option>
+                                    <option value="1ER" {{ request('trimestre') == '1ER' ? 'selected' : '' }}>1ER</option>
+                                    <option value="2DO" {{ request('trimestre') == '2DO' ? 'selected' : '' }}>2DO</option>
+                                    <option value="3ER" {{ request('trimestre') == '3ER' ? 'selected' : '' }}>3ER</option>
+                                </select>
+                            </div>
+
+                            <!-- Filtro por área con áreas dinámicas -->
+                            <div class="col-span-1 focus:outline-none">
+                                <label for="area" class="block text-sm font-bold text-gray-200 mb-2">Área</label>
+                                <select name="area" class="w-full p-3 rounded bg-gray-700 text-white focus:outline-none">
+                                    <option value="">Seleccionar área</option>
+                                    @foreach($areas as $area)
+                                        <option value="{{ $area }}" {{ request('area') == $area ? 'selected' : '' }}>{{ $area }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Botón para aplicar los filtros -->
+                        <div class="col-span-3 text-center">
+                            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                Filtrar
+                            </button>
+                        </div>
+                        
+                        
+                    </div>
+                </form>
+
                 <!-- Tabla Explicativa de Ítems -->
                 <div class="mb-8">
                     <h3 class="font-semibold text-xl text-white leading-tight mb-4">
@@ -99,7 +146,7 @@
                 </div>
 
                 <div class="mb-4">
-                    <a href="{{ route('reports.create') }}" class="bg-cyan-500 dark:bg-cyan-700 hover:bg-cyan-600 dark:hover:bg-cyan-800 text-white font-bold py-2 px-4 rounded">Create Report</a>
+                    <a href="{{ route('reports.create') }}" class="bg-cyan-500 dark:bg-cyan-700 hover:bg-cyan-600 dark:hover:bg-cyan-800 text-white font-bold py-2 px-4 rounded">Crear Nuevo Reporte</a>
                 </div>
 
                 <div class="grid grid-cols-1 gap-4">
@@ -120,8 +167,8 @@
                             </div>
                             <!-- Opciones -->
                             <div class="flex">
-                                <a href="{{ route('reports.edit', $report->id) }}" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mr-2">Edit</a>
-                                <button type="button" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded" onclick="confirmDelete('{{ $report->id }}')">Delete</button>
+                                <a href="{{ route('reports.edit', $report->id) }}" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mr-2">Modificar</a>
+                                <button type="button" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded" onclick="confirmDelete('{{ $report->id }}')">Quitar</button>
                             </div>
                         </div>
                     </div>

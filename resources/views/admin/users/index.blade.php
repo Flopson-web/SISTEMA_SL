@@ -17,7 +17,7 @@
 
                     <!-- Botón de Crear Usuario -->
                     <div class="mb-4 flex justify-center">
-                        <a href="{{ route('users.create') }}" class="bg-yellow-500 dark:bg-yellow-700 hover:bg-yellow-600 dark:hover:bg-yellow-800 text-white font-bold py-2 px-4 rounded shadow-lg transform hover:scale-105 transition-transform duration-300">Create User</a>
+                        <a href="{{ route('users.create') }}" class="bg-yellow-500 dark:bg-yellow-700 hover:bg-yellow-600 dark:hover:bg-yellow-800 text-white font-bold py-2 px-4 rounded shadow-lg transform hover:scale-105 transition-transform duration-300">Crear Usuario</a>
                     </div>
 
                     <!-- Cuadrícula de Usuarios -->
@@ -32,8 +32,8 @@
 
                             <!-- Opciones -->
                             <div class="flex justify-center mt-4 space-x-4">
-                                <a href="{{ route('users.edit', $user->id) }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transform hover:scale-110 transition-transform duration-300">Edit</a>
-                                <button type="button" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded transform hover:scale-110 transition-transform duration-300" onclick="confirmDelete('{{ $user->id }}')">Delete</button>
+                                <a href="{{ route('users.edit', $user->id) }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transform hover:scale-110 transition-transform duration-300">Editar</a>
+                                <button type="button" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded transform hover:scale-110 transition-transform duration-300" onclick="confirmDelete('{{ $user->id }}')">Eliminar</button>
                             </div>
                         </div>
                         @endforeach

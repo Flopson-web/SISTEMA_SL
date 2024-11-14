@@ -17,7 +17,7 @@
 
                     <!-- Botón de Crear Profesor -->
                     <div class="mb-4">
-                        <a href="{{ route('teachers.create') }}" class="bg-yellow-500 dark:bg-yellow-700 hover:bg-yellow-600 dark:hover:bg-yellow-800 text-white font-bold py-2 px-4 rounded">Create Teacher</a>
+                        <a href="{{ route('teachers.create') }}" class="bg-yellow-500 dark:bg-yellow-700 hover:bg-yellow-600 dark:hover:bg-yellow-800 text-white font-bold py-2 px-4 rounded">Crear Profesor</a>
                     </div>
 
                     <!-- Listado de Profesores -->
@@ -35,8 +35,8 @@
                                 </div>
                                 <!-- Opciones -->
                                 <div class="flex">
-                                    <a href="{{ route('teachers.edit', $teacher->id) }}" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mr-2">Edit</a>
-                                    <button type="button" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded" onclick="confirmDelete('{{ $teacher->id }}')">Delete</button>
+                                    <a href="{{ route('teachers.edit', $teacher->id) }}" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mr-2">Editar</a>
+                                    <button type="button" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded" onclick="confirmDelete('{{ $teacher->id }}')">Eliminar</button>
                                 </div>
                             </div>
                         </div>

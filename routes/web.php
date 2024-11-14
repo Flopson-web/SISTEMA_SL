@@ -1,5 +1,8 @@
 <?php
 
+use App\Exports\ReportsExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\StudentController;
@@ -60,4 +63,9 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
     //Route::get('offline', function (){
     //    return view('vendor.laravelpwa.offline');
    // });
+
+   Route::get('/students/{id}/reports/pdf', [StudentController::class, 'exportReportsPdf'])->name('students.reports.exportPdf');
+
+   Route::get('/students/{id}/export-reports-csv', [StudentController::class, 'exportReportsCsv'])->name('students.exportReportsCsv');
+
 });

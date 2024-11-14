@@ -17,7 +17,7 @@
 
                     <!-- Botón de Crear Curso -->
                     <div class="mb-4">
-                        <a href="{{ route('courses.create') }}" class="bg-teal-500 dark:bg-teal-700 hover:bg-teal-600 dark:hover:bg-teal-800 text-white font-bold py-2 px-4 rounded">Create Course</a>
+                        <a href="{{ route('courses.create') }}" class="bg-teal-500 dark:bg-teal-700 hover:bg-teal-600 dark:hover:bg-teal-800 text-white font-bold py-2 px-4 rounded">Crear Curso</a>
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -30,8 +30,8 @@
                             <p class="mb-1" style="color: {{ ['#FFFFFF', '#000000', '#000000'][($loop->index % 3)] }};">Asesor 1: {{ $course->asesor1->nombre }}</p>
                             <p class="mb-4" style="color: {{ ['#FFFFFF', '#000000', '#000000'][($loop->index % 3)] }};">Asesor 2: {{ $course->asesor2->nombre }}</p>
                             <div class="flex justify-between">
-                                <a href="{{ route('courses.edit', $course->id) }}" class="bg-red-500 dark:bg-red-700 hover:bg-red-600 dark:hover:bg-red-800 text-white font-bold py-2 px-4 rounded">Edit</a>
-                                <button type="button" class="bg-red-500 dark:bg-red-700 hover:bg-red-600 dark:hover:bg-red-800 text-white font-bold py-2 px-4 rounded" onclick="confirmDelete('{{ $course->id }}')">Delete</button>
+                                <a href="{{ route('courses.edit', $course->id) }}" class="bg-red-500 dark:bg-red-700 hover:bg-red-600 dark:hover:bg-red-800 text-white font-bold py-2 px-4 rounded">Modificar</a>
+                                <button type="button" class="bg-red-500 dark:bg-red-700 hover:bg-red-600 dark:hover:bg-red-800 text-white font-bold py-2 px-4 rounded" onclick="confirmDelete('{{ $course->id }}')">Eliminar</button>
                             </div>
                         </div>
                         @endforeach
