@@ -11,6 +11,9 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <script src="{{asset('js/alertify.min.js')}}"></script>
@@ -18,16 +21,20 @@
         <!-- Styles -->
         @livewireStyles
         <link href="{{ asset('css/alertify.min.css') }}" rel="stylesheet">
+        @laravelPWA
     </head>
     <body class="font-sans antialiased">
         <x-banner />
-
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-
+          <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        
+        <!-- Eliminar el fondo blanco predeterminado -->
+        <div class="min-h-screen" style="background: none;">
+            {{--//este es el show del home--}}
             @livewire('navigation')
 
             <!-- Page Content -->
-            <main>
+            <main style="background: transparent;">
                 {{ $slot }}
             </main>
         </div>

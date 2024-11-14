@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Student;
 use App\Models\Course;
 use App\Models\User;
+use App\Models\Report;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+use PDF; 
 
 class StudentController extends Controller
 {
@@ -15,7 +18,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::all();
+        $students = Student::paginate(10);
         return view ('admin.students.index', compact('students'));
     }
 
@@ -53,11 +56,11 @@ class StudentController extends Controller
             'direccion_actual' => 'nullable|string|max:255',
             'telefono_casa' => 'nullable|integer',
             'celular_estudiante' => 'nullable|integer',
-            'trabaja' => 'nullable|in:Sí,No',
+            'trabaja' => 'nullable|in:Si,No',
             'lugar_trabajo' => 'nullable|string|max:255',
             'nro_dosis_covid' => 'nullable|integer',
-            'vive_con' => 'nullable|in:Padres,Abuelos,Tíos,Hermanos,Otros',
-            'religion' => 'nullable|in:Católica,Evangélica,Otra',
+            'vive_con' => 'nullable|in:Padres,Abuelos,Tios,Hermanos,Otros',
+            'religion' => 'nullable|in:Catolica,Evangelica,Otra',
             'user_id' => 'required|exists:users,id',
             'course_id' => 'required|exists:courses,id',
         ]);
@@ -66,7 +69,7 @@ class StudentController extends Controller
         Student::create($request->all());
 
         // Redireccionar a la vista de listado de estudiantes
-        return redirect()->route('admin.students.index');
+        return redirect()->route('students.index');
     }
 
     /**
@@ -113,12 +116,11 @@ class StudentController extends Controller
             'direccion_actual' => 'nullable|string|max:255',
             'telefono_casa' => 'nullable|integer',
             'celular_estudiante' => 'nullable|integer',
-            'trabaja' => 'nullable|in:Sí,No',
+            'trabaja' => 'nullable|in:Si,No',
             'lugar_trabajo' => 'nullable|string|max:255',
             'nro_dosis_covid' => 'nullable|integer',
-            'vive_con' => 'nullable|in:Padres,Abuelos,Tíos,Hermanos,Otros',
-            'religion' => 'nullable|in:Católica,Evangélica,Otra',
-            'user_id' => 'required|exists:users,id',
+            'vive_con' => 'nullable|in:Padres,Abuelos,Tios,Hermanos,Otros',
+            'religion' => 'nullable|in:Catolica,Evangelica,Otra',
             'course_id' => 'required|exists:courses,id',
         ]);
 
@@ -129,7 +131,7 @@ class StudentController extends Controller
         $students->update($request->all());
 
         // Redireccionar a la vista de listado de estudiantes
-        return redirect()->route('admin.students.index');
+        return redirect()->route('students.index');
     }
 
     /**
@@ -141,6 +143,126 @@ class StudentController extends Controller
 
         $students->delete();
 
-        return redirect()->route('admin.students.index');
+        return redirect()->route('students.index');
     }
+
+    public function showReports($id, Request $request)
+    {
+        // Encontrar al estudiante por ID
+        $student = Student::findOrFail($id);
+
+        // Inicializa la consulta base
+        $query = Report::where('student_id', $id);
+
+        // Filtrar por fecha
+        if ($request->filled('fecha')) {
+            $query->where('fecha', $request->fecha);
+        }
+
+        // Filtrar por trimestre (si aplica)
+        if ($request->filled('trimestre')) {
+            $query->where('trimestre', $request->trimestre);
+        }
+
+        // Filtrar por área (si aplica)
+        if ($request->filled('area')) {
+            $query->where('area', $request->area);
+        }
+
+        // Obtener las áreas únicas de la base de datos
+        $areas = Report::select('area')->distinct()->pluck('area');
+
+        // Ordenar por la fecha más reciente
+        $query->orderBy('fecha', 'desc');
+
+        // Obtener los reportes con los filtros aplicados y paginar
+        $reports = $query->paginate(10);
+
+        // Retornar la vista con el estudiante, reportes filtrados y las áreas disponibles
+        return view('admin.students.reports', compact('student', 'reports', 'areas'));
+}
+
+public function exportReportsCsv($id, Request $request)
+{
+    // Obtener los reportes asociados al estudiante con filtros
+    $query = Report::where('student_id', $id);
+
+    // Aplicar filtros si existen
+    if ($request->has('fecha') && $request->input('fecha') != '') {
+        $query->whereDate('fecha', $request->input('fecha'));
+    }
+
+    if ($request->has('trimestre') && $request->input('trimestre') != '') {
+        $query->where('trimestre', $request->input('trimestre'));
+    }
+
+    if ($request->has('area') && $request->input('area') != '') {
+        $query->where('area', $request->input('area'));
+    }
+
+    $reports = $query->get();
+
+    // Crear el archivo CSV
+    $csvData = "ID,Nombre,Fecha,Ítem,Área,Trimestre,Detalle/Observaciones,Profesor ID,Estudiante ID,Curso ID\n";
+
+    foreach ($reports as $report) {
+        $csvData .= $report->id . ','
+                    . $report->nombre . ','
+                    . $report->fecha->format('Y-m-d') . ','
+                    . $report->item . ','
+                    . $report->area . ','
+                    . $report->trimestre . ','
+                    . $report->detalle_observaciones . ','
+                    . $report->teacher_id . ','
+                    . $report->student_id . ','
+                    . $report->course_id . "\n";
+    }
+
+    // Descargar el archivo CSV
+    $response = Response::make(rtrim($csvData, "\n"), 200, [
+        'Content-Type' => 'text/csv',
+        'Content-Disposition' => 'attachment; filename="reports.csv"',
+    ]);
+
+    return $response;
+}
+public function exportReportsPdf($id, Request $request)
+{
+    // Obtener los reportes asociados al estudiante con filtros
+    $query = Report::where('student_id', $id);
+
+    // Aplicar filtros si existen
+    if ($request->has('fecha') && $request->input('fecha') != '') {
+        $query->whereDate('fecha', $request->input('fecha'));
+    }
+
+    if ($request->has('trimestre') && $request->input('trimestre') != '') {
+        $query->where('trimestre', $request->input('trimestre'));
+    }
+
+    if ($request->has('area') && $request->input('area') != '') {
+        $query->where('area', $request->input('area'));
+    }
+
+    $reports = $query->get();
+
+    // Obtener el estudiante
+    $student = Student::findOrFail($id);
+
+   // Obtener los reportes asociados al estudiante con la relación del profesor
+   $student = Student::findOrFail($id);
+   $reports = Report::with('teacher')->where('student_id', $id)->get(); // Cargar la relación
+
+   
+
+    // Generar el PDF
+    $pdf = PDF::loadView('reports_pdf', compact('student', 'reports'));
+
+    // Configuración de Dompdf para permitir imágenes remotas
+    $pdf->setOptions(['isRemoteEnabled' => true]);
+
+
+    // Descargar el PDF con un nombre específico
+    return $pdf->download('reports_' . $student->nombre . '.pdf');
+}
 }

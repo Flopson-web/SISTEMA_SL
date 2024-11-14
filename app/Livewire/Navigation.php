@@ -8,6 +8,9 @@ use App\Models\Teacher;
 use App\Models\Student;
 use App\Models\Report;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Traits\HasRoles;
+
 
 class Navigation extends Component
 {
@@ -19,6 +22,7 @@ class Navigation extends Component
         $reports = Report::all();
         $users = User::all();
 
+      
         return view('livewire.navigation', compact('courses', 'students', 'reports', 'users', 'teachers'));
     }
 }

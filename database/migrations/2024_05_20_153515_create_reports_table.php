@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('detalle_observaciones')->nullable();
             $table->foreignId('student_id')->constrained('students')->onDelete('CASCADE');
             $table->foreignId('course_id')->constrained('courses')->onDelete('CASCADE');
+            $table->foreignId('teacher_id')->constrained('teachers')->onDelete('CASCADE');
             $table->timestamps();
         });
     }

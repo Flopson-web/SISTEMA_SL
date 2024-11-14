@@ -13,7 +13,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::paginate(12);
         return view ('admin.users.index', compact('users'));
     }
 
@@ -22,7 +22,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+        $users = User::all();
+        return view('admin.users.create', compact('users'));
     }
 
     /**
@@ -30,20 +31,23 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         // Validar los datos del formulario
+        $request->validate([
+            'name' => 'required|string|min:5|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        // Cifrar la contraseña
+        $request['password'] = bcrypt($request['password']);
+
+        // Crear un nuevo profesor usando el método `create` del modelo
+        User::create($request->all());
+
+        // Redireccionar a la vista de listado de profesor
+        return redirect()->route('users.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $users = User::findOrFail($id);
@@ -55,7 +59,24 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Validar los datos del formulario
+        $request->validate([
+            'name' => 'required|string|min:5|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        // Cifrar la contraseña
+        $request['password'] = bcrypt($request['password']);
+
+        // Buscar el estudiante por su ID
+        $users = User::findOrFail($id);
+
+        // Actualizar los datos del estudiante
+        $users->update($request->all());
+
+        // Redireccionar a la vista de listado de estudiantes
+        return redirect()->route('users.index');
     }
 
     /**
@@ -63,6 +84,10 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $users = User::findOrFail($id);
+
+        $users->delete();
+
+        return redirect()->route('users.index');
     }
 }

@@ -14,7 +14,7 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        $teachers = Teacher::all();
+        $teachers = Teacher::paginate(10);
         return view ('admin.teachers.index', compact('teachers'));
     }
 
@@ -34,7 +34,7 @@ class TeacherController extends Controller
     {
         // Validar los datos del formulario
         $request->validate([
-            'nombre' => 'required|string|min:5|max:255',
+            'nombre' => 'required|string|min:3|max:255',
             'apellido' => 'required|string|min:5|max:255',
             'especialidad' => 'required|string|min:5|max:255',
             'edad' => 'required|integer|min:1',
@@ -45,7 +45,7 @@ class TeacherController extends Controller
         Teacher::create($request->all());
 
         // Redireccionar a la vista de listado de profesor
-        return redirect()->route('admin.teachers.index');
+        return redirect()->route('teachers.index');
 
     }
 
@@ -82,7 +82,7 @@ class TeacherController extends Controller
         $teachers->update($request->all());
 
         // Redireccionar a la vista de listado de estudiantes
-        return redirect()->route('admin.teachers.index');
+        return redirect()->route('teachers.index');
     }
 
     /**
@@ -94,6 +94,6 @@ class TeacherController extends Controller
 
         $teachers->delete();
 
-        return redirect()->route('admin.teachers.index');
+        return redirect()->route('teachers.index');
     }
 }

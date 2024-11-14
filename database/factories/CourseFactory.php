@@ -18,13 +18,16 @@ class CourseFactory extends Factory
      */
     public function definition(): array
     {
+        $asesor1 = Teacher::inRandomOrder()->first()->id;
+        $asesor2 = Teacher::inRandomOrder()->first()->id;
+
         return [
-                'nombre_curso' => $this->faker->word,
-                'gestion_academica' => $this->faker->year,
-                'paralelo' => $this->faker->randomElement(['A', 'B', 'C', 'D']),
-                'turno' => $this->faker->randomElement(['Mañana', 'Tarde']),
-                'asesor_id_1' => Teacher::all()->random()->id,
-                'asesor_id_2' => Teacher::all()->random()->id
+            'nombre_curso' => $this->faker->word,
+            'gestion_academica' => $this->faker->year,
+            'paralelo' => $this->faker->randomElement(['A', 'B', 'C', 'D']),
+            'turno' => $this->faker->randomElement(['Mañana', 'Tarde']),
+            'asesor_id_1' => $asesor1,
+            'asesor_id_2' => $asesor2,
         ];
     }
 }

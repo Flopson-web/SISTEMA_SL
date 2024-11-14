@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Report;
 use App\Models\Student;
 use App\Models\Course;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
@@ -13,10 +14,39 @@ class ReportController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $reports = Report::all();
-        return view ('admin.reports.index', compact('reports'));
+        // Inicializa la consulta base
+        $query = Report::query();
+
+
+        // Filtrar por fechas (rango entre fecha_inicio y fecha_fin)
+        if ($request->filled('fecha')) {
+            $query->where('fecha', $request->fecha);
+        }
+
+        // Filtrar por trimestre
+        if ($request->filled('trimestre')) {
+            $query->where('trimestre', $request->trimestre);
+        }
+
+        // Filtrar por área (las áreas existentes en la base de datos)
+        if ($request->filled('area')) {
+            $query->where('area', $request->area);
+        }
+
+        // Obtener las áreas únicas de la base de datos
+        $areas = Report::select('area')->distinct()->pluck('area');
+
+        // Ordenar por la fecha más reciente, incluso si no hay filtros
+        $query->orderBy('fecha', 'desc');
+
+        // Obtener los reportes con los filtros aplicados y paginar
+        $reports = $query->paginate(10);
+
+        // Retornar la vista con los reportes filtrados y las áreas disponibles
+        return view('admin.reports.index', compact('reports', 'areas'));
+    
     }
 
     /**
@@ -26,7 +56,8 @@ class ReportController extends Controller
     {
         $courses = Course::all();
         $students = Student::all();
-        return view('admin.reports.create', compact('courses', 'students'));
+        $teachers = Teacher::all();
+        return view('admin.reports.create', compact('courses', 'students', 'teachers'));
     }
 
     /**
@@ -44,13 +75,14 @@ class ReportController extends Controller
             'detalle_observaciones' => 'nullable|string',
             'student_id' => 'required|exists:students,id',
             'course_id' => 'required|exists:courses,id',
+            'teacher_id' => 'required|exists:teachers,id',
         ]);
 
          // Crear un nuevo reporte usando el método `create` del modelo
         Report::create($request->all());
 
         // Redireccionar a la vista de listado de estudiantes
-        return redirect()->route('admin.reports.index');
+        return redirect()->route('reports.index');
     }
 
     /**
@@ -64,8 +96,9 @@ class ReportController extends Controller
     {
         $courses = Course::all();
         $students = Student::all();
+        $teachers = Teacher::all();
         $reports = Report::findOrFail($id);
-        return view('admin.reports.edit', compact('reports', 'courses', 'students'));
+        return view('admin.reports.edit', compact('reports', 'courses', 'students', 'teachers'));
     }
 
     /**
@@ -83,6 +116,7 @@ class ReportController extends Controller
             'detalle_observaciones' => 'nullable|string',
             'student_id' => 'required|exists:students,id',
             'course_id' => 'required|exists:courses,id',
+            'teacher_id' => 'required|exists:teachers,id',
         ]);
 
         // Buscar el estudiante por su ID
@@ -92,7 +126,7 @@ class ReportController extends Controller
         $reports->update($request->all());
 
         // Redireccionar a la vista de listado de estudiantes
-        return redirect()->route('admin.reports.index');
+        return redirect()->route('reports.index');
     }
 
     /**
@@ -104,6 +138,6 @@ class ReportController extends Controller
 
         $reports->delete();
 
-        return redirect()->route('admin.reports.index');
+        return redirect()->route('reports.index');
     }
 }

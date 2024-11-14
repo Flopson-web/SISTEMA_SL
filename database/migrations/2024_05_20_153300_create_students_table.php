@@ -30,11 +30,11 @@ return new class extends Migration
             $table->string('direccion_actual', 255)->nullable();
             $table->integer('telefono_casa')->nullable();
             $table->integer('celular_estudiante')->nullable();
-            $table->enum('trabaja', ['Sí', 'No'])->nullable();
+            $table->enum('trabaja', ['Si', 'No'])->nullable();
             $table->string('lugar_trabajo', 255)->nullable();
             $table->integer('nro_dosis_covid')->nullable();
-            $table->enum('vive_con', ['Padres', 'Abuelos', 'Tíos', 'Hermanos', 'Otros'])->nullable();
-            $table->enum('religion', ['Católica', 'Evangélica', 'Otra'])->nullable();
+            $table->enum('vive_con', ['Padres', 'Abuelos', 'Tios', 'Hermanos', 'Otros'])->nullable();
+            $table->enum('religion', ['Catolica', 'Evangelica', 'Otra'])->nullable();
             $table->foreignId('user_id')->constrained('users')->onDelete('CASCADE');
             $table->foreignId('course_id')->constrained('courses')->onDelete('CASCADE');
             $table->timestamps();

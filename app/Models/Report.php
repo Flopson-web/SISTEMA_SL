@@ -17,7 +17,8 @@ class Report extends Model
         'trimestre', 
         'detalle_observaciones', 
         'student_id', 
-        'course_id'
+        'course_id',
+        'teacher_id'
     ];
 
 
@@ -27,5 +28,9 @@ class Report extends Model
 
     public function courses(){
         return $this->belongsTo(Course::class, 'course_id');
+    }
+
+    public function teacher(){
+        return $this->belongsTo(Teacher::class, 'teacher_id');
     }
 }
